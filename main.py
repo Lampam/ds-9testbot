@@ -9,7 +9,7 @@ TOKEN = '5398129352:AAFw4YW2s1j-vjtD0Jrx1YES1LLZa4SHr64'
 owm = pyowm.OWM('34061489cac1c02b9b92393235e3b04a')
 bot = telebot.TeleBot('5398129352:AAFw4YW2s1j-vjtD0Jrx1YES1LLZa4SHr64')
 APP_URL = f'https://ds-9testbot.herokuapp.com/{TOKEN}'
-server = Flask(__name__)
+
 
 
 @bot.message_handler(commands=['start'])
@@ -68,22 +68,7 @@ def test(message):
 		bot.send_photo(message.chat.id, 'https://disk.yandex.ru/i/gXH9SlA1I_Q7tA')
 
 
-@server.route('/' + TOKEN, methods=['POST'])
-def get_message():
-    json_string = request.get_data().decode('utf-8')
-    update = telebot.types.Update.de_json(json_string)
-    bot.process_new_updates([update])
-    return '!', 200
-
-
-@server.route('/')
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url=APP_URL)
-    return '!', 200
-
 if __name__ == '__main__':
-	from waitress import serve
-	serve(server, host="0.0.0.0", port=8080)
+	bot.infinity_polling()
 
 
