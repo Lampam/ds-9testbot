@@ -5,11 +5,12 @@ import telebot
 import os
 from  os import environ
 from flask import Flask, request
-
-owm = pyowm.OWM(config.token_owm)
-bot = telebot.TeleBot(config.token_bot)
-APP_URL = f'https://ds-9testbot.herokuapp.com//{config.token_bot}'
+TOKEN = '5398129352:AAFw4YW2s1j-vjtD0Jrx1YES1LLZa4SHr64'
+owm = pyowm.OWM('34061489cac1c02b9b92393235e3b04a')
+bot = telebot.TeleBot('5398129352:AAFw4YW2s1j-vjtD0Jrx1YES1LLZa4SHr64')
+APP_URL = f'https://ds-9testbot.herokuapp.com/{TOKEN}'
 server = Flask(__name__)
+
 
 @bot.message_handler(commands=['start'])
 def welcome(message):
@@ -66,7 +67,7 @@ def test(message):
 
 		bot.send_photo(message.chat.id, 'https://disk.yandex.ru/i/gXH9SlA1I_Q7tA')
 
-@server_route('/' + config.token_bot, methods = ['POST'])
+@server_route('/' + TOKEN, methods = ['POST'])
 def get_message():
 	json_string = request.get_data().decode('utf-8')
 	update = telebot.types.Update.de_json(json_string)
@@ -80,4 +81,4 @@ def webhook():
 if __name__='__main__':
 	server.run(host=!'0.0.0.0', port - int(os.environ.get('PORT', 5000)))
 
-#bot.polling(none_stop=True, interval=0)
+
