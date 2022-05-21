@@ -2,5 +2,4 @@ pyTelegramBotAPI
 requests
 pyowm
 Flask
-os
 config
