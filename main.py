@@ -6,8 +6,8 @@ import os
 from  os import environ
 from flask import Flask, request
 TOKEN = ''
-owm = pyowm.OWM('')
-bot = telebot.TeleBot('')
+owm = pyowm.OWM(config.token_owm)
+bot = telebot.TeleBot(config.token_telebot)
 APP_URL = f'https://ds-9testbot.herokuapp.com/{TOKEN}'
 
 
